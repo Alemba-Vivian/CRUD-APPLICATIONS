@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/6a6bdefd0d.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+    <title>Todo List</title>
+</head>
+<body>
+    <div class="app">
+        <h4 class="mb-3">Todo App</h4>
+        <div id="addNew"  data-bs-toggle="modal" data-bs-target="#form">
+            <span>Add New Task</span>
+            <i class="fa-solid fa-plus"></i>
+        </div>
+
+        <h5 class="text-center my-3">Tasks</h5>
+
+
+<!-- Modal -->
+<form class="modal fade" id="form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Task</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+    <div class="modal-body">
+        <label for="textInput">Task Title</label>
+       <input class="form-control" type="text"  name="" id="textInput">
+       <br>
+       <label for="DateInput">Due Date</label>
+       <input class="form-control" type="date"  name="" id="dateInput">
+       <br>
+       <label for="textarea">Task Description</label>
+       <textarea class="form-control" name="" id="textarea" cols="30" rows="5"></textarea>
+       <div id="msg"></div>
+    </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" id="add" class="btn btn-primary">Add</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+
+
+
+        <div id="tasks">
+            <div>
+                <span class="fw-bold">Task 1</span>
+                <span class="small text-secondary">2023-10-09</span>
+                <p>going to theatre to watch a movie</p>
+
+
+                <span class="span-options">
+                    <i onClick ="editTask(this)" data-bs-toggle="modal" data-bs-target="#form" class="fa-regular fa-pen-to-square"></i>
+                    <i onClick="deleteTask(this)" class="fa-solid fa-trash"></i>
+                </span>
+            </div>
+
+            <div>
+                <span class="fw-bold">Task 2</span>
+                <span class="small text-secondary">2023-10-09</span>
+                <p>going to theatre to watch a movie</p>
+
+
+                <span class="span-options">
+                    <i onClick ="editTask(this)" data-bs-toggle="modal" data-bs-target="#form" class="fa-regular fa-pen-to-square"></i>
+                    <i onClick="deleteTask(this)" class="fa-solid fa-trash"></i>
+                </span>
+            </div>
+
+
+
+        </div>
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="./main.js"></script>
+</body>
+</html>

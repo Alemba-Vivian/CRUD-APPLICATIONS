@@ -23,9 +23,8 @@ const formValidation =()=>{
         errorMessage.innerText = "";
         acceptData();
         add.setAttribute("data-bs-dismiss", "modal");
-        add.click()
-        
-
+        add.click();
+      
         // IIEF Immediately Invoked Expression Functions
         (()=>{
             add.setAttribute("data-bs-dismiss", "");
@@ -34,14 +33,19 @@ const formValidation =()=>{
 }
 
 //creating an empty object
-const data = {}
+let data = [];
 
 
 //accepting and storing data
 const acceptData =()=>{
-    data["text"] = text.value;
-    data["date"] = date.value;
-    data["description"] = textArea.value;
+     data.push({
+        text: text.value,
+        date: date.value,
+        description: textArea.value,
+     });
+
+     localStorage.setItem("data", JSON.stringify(data));
+    
 
     createTasks();
 
@@ -51,20 +55,25 @@ const acceptData =()=>{
 
 //creating tasks
 const createTasks =()=>{
-    tasks.innerHTML +=
-    `
-    <div>
-    <span class="fw-bold">${data.text}</span>
-    <span class="small text-secondary">${data.date}</span>
-    <p>${data.description}</p>
+    tasks.innerHTML = "";
+    data.map((element, index)=>{
+        return  (tasks.innerHTML +=
+        `
+        <div id = ${index}>
+        <span class="fw-bold">${element.text}</span>
+        <span class="small text-secondary">${element.date}</span>
+        <p>${element.description}</p>
+    
+    
+        <span class="span-options">
+            <i onClick ="editTask(this)" data-bs-toggle="modal" data-bs-target="#form" class="fa-regular fa-pen-to-square"></i>
+            <i onClick="deleteTask(this);createTasks()" class="fa-solid fa-trash"></i>
+        </span>
+         </div>
+        `);
 
-
-    <span class="span-options">
-        <i onClick ="editTask(this)" data-bs-toggle="modal" data-bs-target="#form" class="fa-regular fa-pen-to-square"></i>
-        <i onClick="deleteTask(this)" class="fa-solid fa-trash"></i>
-    </span>
-     </div>
-    `
+    })
+   
 
     resetForm();
 }
@@ -80,6 +89,11 @@ const resetForm =()=>{
 //deleting task
 const deleteTask =(e)=>{
   e.parentElement.parentElement.remove();
+  data.splice(e.parentElement.parentElement.id, 1);
+  localStorage.setItem("data", JSON.stringify(data));
+
+  console.log(data);
+ 
 }
 
 //editing task
@@ -90,6 +104,13 @@ const editTask =(e)=>{
     textArea.value = selectedTask.children[2].innerHTML;
 
 
-    selectedTask.remove();
+    deleteTask(e);
 
 }
+
+
+(()=>{
+   data =JSON.parse(localStorage.getItem("data")) || [];
+   createTasks();
+   console.log(data);
+})();
